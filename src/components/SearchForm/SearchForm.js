@@ -1,5 +1,3 @@
-
-
 function SearchForm() {
     return (
         <div className='search'>

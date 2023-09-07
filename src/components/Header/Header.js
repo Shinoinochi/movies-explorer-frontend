@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import AuthorizationHeader from '../AuthorizationHeader/AuthorizationHeader'
 
-
-
 const logginIn = true;
 
 function Header({ headerStyle }) {

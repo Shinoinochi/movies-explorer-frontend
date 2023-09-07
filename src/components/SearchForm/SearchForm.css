@@ -22,7 +22,7 @@
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
-    line-height: 17px; /* 130.769% */
+    line-height: 17px;
 }
 
 .search__input:focus {

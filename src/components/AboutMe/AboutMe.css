@@ -62,7 +62,7 @@
     }
     .about-me__title {
         font-size: 40px;
-        line-height: 40px; /* 100% */
+        line-height: 40px;
         letter-spacing: -1.6px;
     }
     .about-me__subtitle {
@@ -73,7 +73,7 @@
         font-size: 12px;
         font-style: normal;
         font-weight: 400;
-        line-height: 18px; /* 150% */
+        line-height: 18px;
         margin-right: 50px;
         margin-top: 19px;
     }
@@ -85,8 +85,6 @@
         margin-top: 87px;
     }
 }
-
-
 
 @media screen and (max-width:640px) {
     .about-me {
@@ -116,7 +114,7 @@
     }
     .about-me__text {
         font-size: 11px;
-        line-height: 16px; /* 145.455% */
+        line-height: 16px;
         margin-right: 0;
         margin-top: 0;
     }

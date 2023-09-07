@@ -16,7 +16,6 @@ function Register() {
                     <input className='account-form__input' type='password'></input>
                     <button className='account-form__button account-form__button-register' type='submit'>Зарегистрироваться</button>
                 </form>
-                
                 <p className='account__signin'>Уже зарегистрированы? <NavLink to='/signin' className='account__link reg-link'>Войти</NavLink></p>
             </section>
         </>

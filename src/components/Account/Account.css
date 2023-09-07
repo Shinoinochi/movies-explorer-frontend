@@ -11,8 +11,6 @@
     padding: 10px;
 }
 
-
-
 @media screen and (max-width:768px) {
     .header__user-logo {
         padding: 7px;
