@@ -1,0 +1,24 @@
+.account_active {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: 245px;
+    margin-left: 8px;
+}
+.header__user-logo {
+    background-color: #313131;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+
+
+@media screen and (max-width:768px) {
+    .header__user-logo {
+        padding: 7px;
+    }
+    .account_unactive {
+        display: none;
+    }
+}
+

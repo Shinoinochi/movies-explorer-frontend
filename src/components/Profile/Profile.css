@@ -1,0 +1,106 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+}
+.profile-form__box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 410px;
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #424242;
+}
+.profile-form__box:last-of-type {
+    border-bottom: none;
+}
+.profile__title {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 74px 0 123px 0;
+}
+
+.profile-form__title {
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.profile-form__input {
+    background-color: transparent;
+    border: none;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: right;
+    color: #fff;
+    padding: 0;
+}
+
+.profile-form__input::placeholder {
+    color: #fff;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: right;
+}
+
+.profile-form__button-edit {
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 16px;
+    margin-top: 188px;
+}
+.profile-form__button-logout{
+    font-weight: 500;
+    color: #EE3465;
+}
+
+.profile-form__button {
+    font-size: 13px;
+    font-style: normal;
+    line-height: normal;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width:768px) {
+    .profile__title {
+        margin-top: 232px;
+        margin-bottom: 96px;
+    }
+    .profile-form {
+        margin: 0 40px;
+    }
+    .profile-form__button-edit {
+        margin-top: 178px;
+        margin-bottom: 16px;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .profile__title {
+        margin-top: 66px;
+        margin-bottom: 80px;
+    }
+    .profile-form {
+        margin: 0 30px;
+    }
+    .profile-form__box {
+        margin-bottom: 17px;
+    }
+    .profile-form__button-edit {
+        margin-top: 345px;
+    }
+    .profile-form__button {
+        font-size: 12px;
+    }
+}

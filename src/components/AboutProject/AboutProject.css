@@ -1,0 +1,162 @@
+.about__title {
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+    padding-bottom: 23px;
+    border-bottom: 1px solid #DADADA;
+    text-align: left;
+    margin: 0;
+}
+.about {
+    margin: 110px 70px;
+}
+.about__blocks {
+    display: flex;
+    gap: 40px
+}
+
+.about__block {
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+    text-align: left;
+    column-gap:40px;
+}
+.about__subtitle {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.8px;
+    margin: 0;
+    margin-bottom: 26px;
+    margin-top: 70px;
+}
+
+.about__text {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0;
+}
+.about__progress {
+    display: flex;
+    margin-top: 110px;
+}
+.about__steps {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 5.3;
+}
+.about__steps:first-child {
+    flex-grow: 1;
+}
+
+.about__week {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background-color: #303030;
+    height: 36px;
+    margin: 0;
+    border: none;
+    color: #fff;
+}
+
+.about__skill {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
+    color: #8B8B8B;
+    margin: 0;
+    margin-top: 14px;
+}
+
+.one {
+    color: #000;
+    background-color: #3DDC84;
+}
+
+@media screen and (max-width:768px) {
+    .about {
+        margin: 90px 50px;
+    }
+    .about__blocks {
+        gap: 30px
+    }
+    .about__subtitle {
+        margin-bottom: 22px;
+    }
+    .about__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .about__progress {
+        margin-top: 93px;
+    }
+    .about__steps {
+        flex-grow: 6.6;
+    }
+}
+@media screen and (max-width:650px) {
+    .about__blocks {
+        flex-direction: column;
+    }
+    .about__block {
+        width: 100%;
+    }
+}
+@media screen and (max-width:320px) {
+    .about {
+        margin: 70px 18px;
+    }
+    .about__title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        padding-bottom: 28px;
+        margin-bottom: 60px;
+    }
+    .about__subtitle {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .about__blocks {
+        flex-direction: column;
+    }
+    .about__blocks {
+        gap: 57px;
+    }
+    .about__block {
+        width: 284px;
+        gap: 17px;
+    }
+    .about__steps {
+        margin-top: 60px;
+        flex-grow: 3;
+    }
+    .about__progress {
+        margin-top: 50px;
+    }
+    .about__steps {
+        margin: 0;
+    }
+    .about__text {
+        font-size: 11px;
+        line-height: 16px; /* 150% */
+    }
+    .about__week {
+        margin-top: 10px;
+        font-size: 11px;
+    }
+    .about__skill {
+        font-size: 11px;
+        margin-top: 8px;
+    }
+}
