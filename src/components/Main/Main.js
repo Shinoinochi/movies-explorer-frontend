@@ -9,16 +9,18 @@ import Footer from '../Footer/Footer';
 
 function Main() {
     return (
-      <div className="main">
+      <>
         <Header headerStyle={'header-main'}/>
-        <Promo/>
-        <NavTab/>
-        <AboutProject/>
-        <Techs/>
-        <AboutMe/>
-        <Portfolio/>
+        <main className="main">
+          <Promo/>
+          <NavTab/>
+          <AboutProject/>
+          <Techs/>
+          <AboutMe/>
+          <Portfolio/>
+        </main>
         <Footer/>
-      </div>
+      </>
     );
   }
   

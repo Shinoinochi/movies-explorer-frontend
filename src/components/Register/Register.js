@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function Register() {
     return (
         <>
-            <section className='account'>
+            <main className='account'>
                 <NavLink className='logo' to='/'><img className='account__logo' src={logo} alt="Логотип"></img></NavLink>
                 <h2 className='account__title'>Добро пожаловать!</h2>
                 <form className='account-form'>
@@ -17,7 +17,7 @@ function Register() {
                     <button className='account-form__button account-form__button-register' type='submit'>Зарегистрироваться</button>
                 </form>
                 <p className='account__signin'>Уже зарегистрированы? <NavLink to='/signin' className='account__link reg-link'>Войти</NavLink></p>
-            </section>
+            </main>
         </>
     );
   }

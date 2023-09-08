@@ -8,9 +8,11 @@ function Movies() {
     return (
         <>
             <Header/>
-            <SearchForm/>
-                <MoviesCardList isSaved={false}/>
-            <button className='more-button'>Ещё</button>
+            <main className="main">
+                <SearchForm/>
+                    <MoviesCardList isSaved={false}/>
+                <button className='more-button'>Ещё</button>
+            </main>
             <Footer/>
         </>
     );

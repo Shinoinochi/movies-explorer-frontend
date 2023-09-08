@@ -5,7 +5,7 @@ function Profile() {
     return (
         <>
             <Header/>
-            <section className='profile'>
+            <main className='profile'>
                 <h2 className='profile__title'>Привет, Виталий!</h2>
                 <form className='profile-form'>
                     <div className='profile-form__box'>
@@ -19,7 +19,7 @@ function Profile() {
                 </form>
                 <button className='profile__button-edit profile__button'>Редактировать</button>
                 <NavLink to='/'><button className='profile__button-logout profile__button'>Выйти из аккаунта</button></NavLink>
-            </section>
+            </main>
         </>
     );
   }
