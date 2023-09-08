@@ -8,7 +8,7 @@ function SavedMovies() {
         <>
             <Header/>
             <SearchForm/>
-            <MoviesCardList/>
+            <MoviesCardList isSaved={true} />
             <Footer/>
         </>
     );

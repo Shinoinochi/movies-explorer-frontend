@@ -60,7 +60,11 @@
         flex-direction: column;
         padding: 0 10px;
     }
+    .footer__text {
+        font-size: 12px;
+    }
     .footer__bottom {
+        margin-top: 31px;
         flex-direction: column-reverse;
     }
     .footer__menu {
@@ -68,12 +72,13 @@
         padding: 0;
     }
     .footer__copyright {
+        font-size: 12px;
         margin-top: 18px;
         color: #8B8B8B;
     }
     .footer__menu-link {
         margin: 0;
         margin-bottom: 12px;
-
+        font-size: 12px;
     }
 }

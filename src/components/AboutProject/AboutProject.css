@@ -149,7 +149,7 @@
     }
     .about__text {
         font-size: 11px;
-        line-height: 16px; /* 150% */
+        line-height: 16px;
     }
     .about__week {
         margin-top: 10px;

@@ -1,8 +1,5 @@
-.account_active {
-    display: flex;
-    justify-content: center;
-    margin-top: auto;
-    margin-bottom: 245px;
+.header__account_active {
+    margin-bottom: 220px;
     margin-left: 8px;
 }
 .header__user-logo {
@@ -15,7 +12,7 @@
     .header__user-logo {
         padding: 7px;
     }
-    .account_unactive {
+    .header__account_unactive {
         display: none;
     }
 }

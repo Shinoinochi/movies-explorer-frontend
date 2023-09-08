@@ -1,20 +1,16 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList() {
+function MoviesCardList( { isSaved } ) {
     return (
-        <section className='movies'>
-            <MoviesCard/>
-            <MoviesCard/>
-            <MoviesCard/>
-            <MoviesCard/>
-            <MoviesCard/>
-            <MoviesCard/>
-            <MoviesCard/>
-            <MoviesCard/>
-            <MoviesCard/>
-            <MoviesCard/>
-            <MoviesCard/>
-        </section>
+        <ul className='movies'>
+            <MoviesCard isSaved={isSaved}/>
+            <MoviesCard isSaved={isSaved}/>
+            <MoviesCard isSaved={isSaved}/>
+            <MoviesCard isSaved={isSaved}/>
+            <MoviesCard isSaved={isSaved}/>
+            <MoviesCard isSaved={isSaved}/>
+            <MoviesCard isSaved={isSaved}/>
+        </ul>
     );
   }
   

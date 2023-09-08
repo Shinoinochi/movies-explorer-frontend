@@ -9,7 +9,7 @@ function Header({ headerStyle }) {
     return (
         <header className={`header ${headerStyle}`}>
           <div className='header__block'>
-            <NavLink to='/' className='header__logot'><img src={logo} className='header__logo' alt='Логотип'/></NavLink>
+            <NavLink to='/' className='header__logot logo'><img src={logo} className='header__logo' alt='Логотип'/></NavLink>
           </div>
           { logginIn ? <Navigation/> : <AuthorizationHeader/> }
         </header>

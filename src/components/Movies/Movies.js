@@ -9,7 +9,7 @@ function Movies() {
         <>
             <Header/>
             <SearchForm/>
-                <MoviesCardList/>
+                <MoviesCardList isSaved={false}/>
             <button className='more-button'>Ещё</button>
             <Footer/>
         </>

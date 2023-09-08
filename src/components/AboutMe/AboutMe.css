@@ -13,6 +13,18 @@
 }
 
 .about-me__title {
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+    padding-bottom: 23px;
+    border-bottom: 1px solid #DADADA;
+    text-align: left;
+    margin: 0;
+}
+
+.about-me__subtitle {
     font-size: 50px;
     font-style: normal;
     font-weight: 400;
@@ -21,7 +33,7 @@
     margin: 0;
 }
 
-.about-me__subtitle {
+.about-me__info {
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -60,12 +72,12 @@
     .about-me {
         margin: 90px 50px 91px 50px;
     }
-    .about-me__title {
+    .about-me__subtitle {
         font-size: 40px;
         line-height: 40px;
         letter-spacing: -1.6px;
     }
-    .about-me__subtitle {
+    .about-me__info {
         font-size: 12px;
         margin-top: 15px;
     }
@@ -103,12 +115,12 @@
     .about-me__block {
         gap: 18px;
     }
-    .about-me__title {
+    .about-me__subtitle {
         font-size: 30px;
         line-height: normal;
         letter-spacing: -1.2px;
     }
-    .about-me__subtitle {
+    .about-me__info {
         font-size: 11px;
         margin: 0;
     }
@@ -122,4 +134,12 @@
         margin-top: 22px;
     }
 
+}
+@media screen and (max-width: 320px) {
+    .about__title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        padding-bottom: 28px;
+        margin-bottom: 60px;
+    }
 }

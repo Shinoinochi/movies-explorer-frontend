@@ -40,6 +40,12 @@
     text-align: right;
     color: #fff;
     padding: 0;
+    outline: none;
+    border-radius: 5px;
+}
+
+.profile-form__input:focus {
+    outline: #4285F4 solid 2px;
 }
 
 .profile-form__input::placeholder {
@@ -51,24 +57,28 @@
     text-align: right;
 }
 
-.profile-form__button-edit {
+.profile__button-edit {
     font-weight: 400;
     color: #fff;
     margin-bottom: 16px;
     margin-top: 188px;
 }
-.profile-form__button-logout{
+.profile__button-logout{
     font-weight: 500;
     color: #EE3465;
 }
 
-.profile-form__button {
+.profile__button {
     font-size: 13px;
     font-style: normal;
     line-height: normal;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    transition: opacity 0.3s;
+}
+.profile__button:hover {
+    opacity: 0.8;
 }
 
 @media screen and (max-width:768px) {
@@ -79,7 +89,7 @@
     .profile-form {
         margin: 0 40px;
     }
-    .profile-form__button-edit {
+    .profile__button-edit {
         margin-top: 178px;
         margin-bottom: 16px;
     }
@@ -96,10 +106,10 @@
     .profile-form__box {
         margin-bottom: 17px;
     }
-    .profile-form__button-edit {
+    .profile__button-edit {
         margin-top: 345px;
     }
-    .profile-form__button {
+    .profile__button {
         font-size: 12px;
     }
 }
