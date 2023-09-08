@@ -66,6 +66,7 @@
 .profile__button-logout{
     font-weight: 500;
     color: #EE3465;
+    text-decoration: none;
 }
 
 .profile__button {

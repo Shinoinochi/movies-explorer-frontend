@@ -18,7 +18,7 @@ function Profile() {
                     </div>
                 </form>
                 <button className='profile__button-edit profile__button'>Редактировать</button>
-                <NavLink to='/'><button className='profile__button-logout profile__button'>Выйти из аккаунта</button></NavLink>
+                <NavLink to='/' className='profile__button-logout profile__button'>Выйти из аккаунта</NavLink>
             </main>
         </>
     );
