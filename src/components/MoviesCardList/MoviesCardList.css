@@ -1,7 +1,6 @@
-.movies {
+.cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    /* margin: auto; */
     padding: 0 70px;
     list-style: none;
     font-size: 0;
@@ -12,7 +11,7 @@
 }
 
 @media screen and (max-width:320px) {
-    .movies {
+    .cards {
         padding: 0 10px;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
@@ -39,7 +38,7 @@
 }
 
 @media screen and (max-width:768px) {
-    .movies {
+    .cards {
         padding: 0 30px;
         row-gap: 30px;
         column-gap: 30px;
@@ -60,7 +59,7 @@
 }
 
 @media screen and (max-width:350px) {
-    .movies {
+    .cards {
         padding: 0 10px;
         margin-top: 50px;
         margin-bottom: 26px;

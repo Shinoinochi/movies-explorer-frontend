@@ -26,7 +26,7 @@
 }
 
 .search__input:focus {
-    outline: none;
+    outline: #4285F4 solid 2px;
 }
 
 .search__button {

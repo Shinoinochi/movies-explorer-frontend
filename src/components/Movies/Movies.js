@@ -9,9 +9,11 @@ function Movies() {
         <>
             <Header/>
             <main className="main">
+                <section className='movies'>
                 <SearchForm/>
                     <MoviesCardList isSaved={false}/>
                 <button className='more-button'>Ещё</button>
+                </section>
             </main>
             <Footer/>
         </>
