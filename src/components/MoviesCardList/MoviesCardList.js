@@ -1,15 +1,13 @@
+import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList( { isSaved } ) {
+function MoviesCardList( { isSaved, number, movies, myMovies, saveMovie, handleDelete } ) {
+
     return (
         <ul className='cards'>
-            <MoviesCard isSaved={isSaved}/>
-            <MoviesCard isSaved={isSaved}/>
-            <MoviesCard isSaved={isSaved}/>
-            <MoviesCard isSaved={isSaved}/>
-            <MoviesCard isSaved={isSaved}/>
-            <MoviesCard isSaved={isSaved}/>
-            <MoviesCard isSaved={isSaved}/>
+            {movies.slice(0, number).map((movie) =>
+                <MoviesCard key={isSaved? movie._id : movie.id} isSaved={isSaved} movie={movie} myMovies={myMovies} saveMovie={saveMovie} handleDelete={handleDelete}/>
+            )}
         </ul>
     );
   }

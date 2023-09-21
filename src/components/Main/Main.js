@@ -7,10 +7,10 @@ import Portfolio from '../Portfolio/Portfolio';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-function Main() {
+function Main({ auth }) {
     return (
       <>
-        <Header headerStyle={'header-main'}/>
+        <Header headerStyle={'header-main'} auth={auth}/>
         <main className="main">
           <Promo/>
           <NavTab/>
