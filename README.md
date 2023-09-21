@@ -5,6 +5,10 @@
 
 Название макета dark-3
 
+pull-request : https://github.com/Shinoinochi/movies-explorer-frontend/pull/2
+
+deploy : https://shinoinochi.movies.nomoredomainsicu.ru/
+
 * [Ссылка на проект](https://github.com/Shinoinochi/movies-explorer-frontend)
 ### Технологии
 
