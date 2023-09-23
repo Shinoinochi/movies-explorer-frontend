@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
@@ -22,12 +22,18 @@ function App() {
   const [auth, setAuth] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const [message, setMessage] = React.useState('');
   const [messageSearch, setMessageSearch] = React.useState('');
   const [moviesArray, setMoviesArray] = React.useState([]);
   const [button, setButton] = React.useState(localStorage.getItem('isShort') || true);
   const [localSearchWord, setLocalSearchWord] = React.useState('');
   const [check, setCheck] = React.useState(true); 
+  
+  React.useEffect(() => {
+    setMessage('');
+    setCheck(true);
+  }, [navigate]);
 
   React.useEffect(() => {
       const localMovies = JSON.parse(localStorage.getItem('movies')) || [];
@@ -38,7 +44,7 @@ function App() {
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
-    checkToken();
+    checkToken(location.pathname);
     if (auth) {
       Promise.all([
         mainApi.savedMovies(token),
@@ -51,22 +57,23 @@ function App() {
     }
   }, [auth]);
 
-  React.useEffect(() => {
-    setMessage('');
-    setCheck(true);
-  }, [navigate]);
 
-  function checkToken() {
+
+  function checkToken(location) {
     const token = localStorage.getItem('token');
     if (token) {
       mainApi.getUser(token)
       .then(res => {
         setAuth(true);
+        navigate(location);
         setUser(res);
       })
       .catch((err) => {
         console.log(err);
     });
+    }
+    else {
+      setAuth(false);
     }
   }
 
@@ -78,7 +85,7 @@ function App() {
       setUser(user);
     })
     .catch((err) => {
-      console.log(err);
+      setMessage('Возникла ошибка, попробуйте еще раз');
     });
   }
   function searchMovies(name, checked) {
@@ -198,44 +205,43 @@ function App() {
   }
 
   function registration(name, email, password) {
+    setLoading(true);
     mainApi.createUser(name, email, password)
     .then(user => {
-      if (!user.message) {
+      if (user) {
         login(email, password)
-      }
-      else {
-        if (user.statusCode === 400) {
-          setMessage('При регистрации пользователя произошла ошибка.');
-        }
-        else {
-          setMessage(user.message);
-        }
       }
     })
     .catch(err => {
-      console.log(err);
+      if (err.statusCode === 400) {
+        setMessage('При регистрации пользователя произошла ошибка.');
+      }
+      else {
+        setMessage(err.message);
+      }
     })
+    .finally(() => setLoading(false))
   }
 
   function login(email, password) {
+    setLoading(true);
     mainApi.login(email, password)
     .then(res => {
       if(res.token) {
         setAuth(true);
         localStorage.setItem('token', res.token);
         navigate('/movies', true);
-      } else {
-          if (res.statusCode === 400) {
-            setMessage('Что-то пошло не так...');
-          }
-          else {
-            setMessage(res.message);
-          }
-        }
+      }
     })
     .catch(err => {
-      console.log(err);
+      if (err.statusCode === 400) {
+        setMessage('Что-то пошло не так...');
+      }
+      else {
+        setMessage(err.message);
+      }
     })
+    .finally(() => setLoading(false))
   }
 
   function handleLogout() {
@@ -262,6 +268,7 @@ function App() {
       mainApi.saveMovie(movie, token)
       .then(res => {
         setSavedMovies(oldSave => [...oldSave, res]);
+        setSavedMoviesSearch(oldSave => [...oldSave, res]);
       })
       .catch(err => console.log(err));
     }
@@ -323,8 +330,8 @@ function App() {
                 message={message}
                 setMessage={setMessage}/>
             </ProtectedRouteElement>} />
-          <Route path='/signin' element={<Login login={login} message={message} />} />
-          <Route path='/signup' element={<Register registration={registration} message={message}/>} />
+          <Route path='/signin' element={<Login login={login} loading={loading} message={message} setMessage={setMessage} />} />
+          <Route path='/signup' element={<Register registration={registration} loading={loading} message={message} setMessage={setMessage}/>} />
           <Route path='/*' element={<Page404/>} />
         </Routes>
       </CurrentUserContext.Provider>

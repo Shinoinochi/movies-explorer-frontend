@@ -3,7 +3,14 @@ export default class MainApi {
         this._URL = URL;
         this._headers = headers;
     }
-
+    _checkData(res) {
+        return res.ok? res.json(): Promise.reject(`Ошибка: ${res}`);
+    }
+    _getErrorAuth(res) {
+        return res.json().then((res) => {
+          throw new Error(res.message);
+        });
+      }
     userInfo() {
         return fetch(this._URL + '/users/me', {
             method: 'GET',
@@ -12,7 +19,7 @@ export default class MainApi {
             }
         })
         .then(res => {
-            return res.json();
+            return this._checkData(res);
         })
     }
 
@@ -25,7 +32,7 @@ export default class MainApi {
             }
         })
         .then(res => {
-            return res.json();
+            return this._checkData(res);
         })
     }
 
@@ -38,10 +45,10 @@ export default class MainApi {
             body: JSON.stringify({ email, password })
         })
         .then(res => {
-            return res.json();
+            if (res.ok) return res.json();
+            return this._getErrorAuth(res);
         })
     }
-
 
     createUser(name, email, password) {
         return fetch(this._URL + '/signup', {
@@ -52,7 +59,8 @@ export default class MainApi {
             body: JSON.stringify({name, email, password})
         })
         .then(res => {
-            return res.json();
+            if (res.ok) return res.json();
+            return this._getErrorAuth(res);
         })
     }
 
@@ -77,7 +85,7 @@ export default class MainApi {
             })
         })
         .then(res => {
-            return res.json();
+            return this._checkData(res);
         })
     }
     deleteMovie(movieID, token) {
@@ -89,7 +97,7 @@ export default class MainApi {
             }
         })
         .then(res => {
-            return res.json();
+            return this._checkData(res);
         })
     }
 
@@ -102,7 +110,7 @@ export default class MainApi {
             }
         })
         .then(res => {
-            return res.json();
+            return this._checkData(res);
         })
     }
 
@@ -119,7 +127,7 @@ export default class MainApi {
             })
         })
         .then(res => {
-            return res.json();
+            return this._checkData(res);
         })
     }
 

@@ -15,7 +15,7 @@
     margin-bottom: 14px;
     border-bottom: 1px solid #424242;
 }
-.profile-form__box:last-of-type {
+.profile-form__box:last-child {
     border-bottom: none;
 }
 .profile__title {
@@ -61,7 +61,20 @@
     line-height: normal;
     text-align: right;
 }
-
+.profile-form__error {
+    display: flex;
+    justify-content: center;
+    color: #EE3465;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.profile-form__container {
+    margin-bottom: 10px;
+}
 .profile__button-edit {
     font-weight: 400;
     color: #fff;

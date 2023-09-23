@@ -2,13 +2,27 @@ import logo from '../../images/logo.svg';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useFormWithValidation } from '../../utils/valid';
+const { validate } = require("react-email-validator");
 
-function Register({ registration, message }) {
-    const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+function Register({ registration, loading, message, setMessage }) {
+    const [valid, setValid] = React.useState(false);
+    const { values, handleChange, errors, isValid, resetForm  } = useFormWithValidation();
+    React.useEffect(()=> {
+        if (isValid && validate(values.email)) {
+            setValid(true);
+        } else {
+            setMessage('');
+            setValid(false);
+        }
+    }, [handleChange]);
 
     function handleRegistr(evt) {
         evt.preventDefault();
-        registration(values.name, values.email, values.password);
+        setMessage('');
+        if (!loading) {
+            setValid(loading);
+            registration(values.name, values.email, values.password);
+        }
     }
 
     return (
@@ -27,7 +41,7 @@ function Register({ registration, message }) {
                     <input className='account-form__input' required minLength={8} type='password' placeholder='Введите пароль' name='password' value={values.password || ''} onChange={handleChange}></input>
                     <span className='account-form__error'>{errors.password}</span>
                     <span className='account-form__error'>{message? message : ''}</span>
-                    <button className={isValid? `account-form__button account-form__button-register` : 'account-form__button account-form__button-register account-form__button_disabled'} disabled={!isValid} type='submit'>Зарегистрироваться</button>
+                    <button className={valid ? `account-form__button account-form__button-register` : 'account-form__button account-form__button-register account-form__button_disabled'} disabled={!valid} type='submit'>Зарегистрироваться</button>
                 </form>
                 <p className='account__signin'>Уже зарегистрированы? <NavLink to='/signin' className='account__link reg-link'>Войти</NavLink></p>
             </main>

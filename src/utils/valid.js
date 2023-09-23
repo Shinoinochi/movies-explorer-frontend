@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+const { validate } = require("react-email-validator");
 
 export function useFormWithValidation() {
     const [values, setValues] = React.useState({});
@@ -12,6 +13,7 @@ export function useFormWithValidation() {
       setValues({...values, [name]: value});
       setErrors({...errors, [name]: target.validationMessage });
       setIsValid(target.closest("form").checkValidity());
+
     };
   
     const resetForm = useCallback((newValues = {}, newErrors = {}, newIsValid = false) => {
@@ -22,5 +24,5 @@ export function useFormWithValidation() {
       [setValues, setErrors, setIsValid]
     );
   
-    return { values, handleChange, errors, isValid, resetForm };
+    return { values, setIsValid, handleChange, setErrors, errors, isValid, resetForm, setValues };
   }
