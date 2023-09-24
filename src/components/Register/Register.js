@@ -2,20 +2,19 @@ import logo from '../../images/logo.svg';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useFormWithValidation } from '../../utils/valid';
-const { validate } = require("react-email-validator");
 
 function Register({ registration, loading, message, setMessage }) {
     const [valid, setValid] = React.useState(false);
     const { values, handleChange, errors, isValid, resetForm  } = useFormWithValidation();
-    React.useEffect(()=> {
-        if (isValid && validate(values.email)) {
+
+    React.useEffect((evt)=> {
+        if (isValid) {
             setValid(true);
         } else {
             setMessage('');
             setValid(false);
         }
     }, [handleChange]);
-
     function handleRegistr(evt) {
         evt.preventDefault();
         setMessage('');
@@ -35,7 +34,7 @@ function Register({ registration, loading, message, setMessage }) {
                     <input className='account-form__input' required minLength={2} maxLength={30} placeholder='Введите имя' name='name' value={values.name || ''} onChange={handleChange}></input>
                     <span className='account-form__error'>{errors.name}</span>
                     <label className='account-form__title'>E-mail</label>
-                    <input className='account-form__input' type='email' required placeholder='Введите почту' name='email' value={values.email || ''} onChange={handleChange}></input>
+                    <input className='account-form__input' type='email' required placeholder='Введите почту' pattern='[a-z0-9._%+]+@[a-z0-9.]+\.[a-z]{2,4}$' name='email' value={values.email || ''} onChange={handleChange}></input>
                     <span className='account-form__error'>{errors.email}</span>
                     <label className='account-form__title'>Пароль</label>
                     <input className='account-form__input' required minLength={8} type='password' placeholder='Введите пароль' name='password' value={values.password || ''} onChange={handleChange}></input>

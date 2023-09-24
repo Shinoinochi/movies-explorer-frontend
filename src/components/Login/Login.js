@@ -2,13 +2,12 @@ import React from 'react';
 import logo from '../../images/logo.svg';
 import { NavLink } from 'react-router-dom';
 import { useFormWithValidation } from '../../utils/valid';
-const { validate } = require("react-email-validator");
 
 function Login({ login, loading, message, setMessage }) {
     const [valid, setValid] = React.useState(false);
     const { values, handleChange, errors, isValid, resetForm  } = useFormWithValidation();
     React.useEffect(()=> {
-        if (isValid && validate(values.email)) {
+        if (isValid) {
             setValid(true);
         } else {
             setMessage('');
@@ -32,7 +31,7 @@ function Login({ login, loading, message, setMessage }) {
                 <h2 className='account__title'>Рады видеть!</h2>
                 <form className='account-form' onSubmit={handleLogin}>
                     <label className='account-form__title'>E-mail</label>
-                    <input className='account-form__input' type='email' name='email' value={values.email || ''} required placeholder='Введите почту' onChange={handleChange}></input>
+                    <input className='account-form__input' type='email' name='email' pattern='[a-z0-9._%+]+@[a-z0-9.]+\.[a-z]{2,4}$' value={values.email || ''} required placeholder='Введите почту' onChange={handleChange}></input>
                     <span className='account-form__error'>{errors.email}</span>
                     <label className='account-form__title'>Пароль</label>
                     <input className='account-form__input' required minLength={8} type='password' name='password' value={values.password || ''} placeholder='Введите пароль' onChange={handleChange}></input>

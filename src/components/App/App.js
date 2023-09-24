@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
@@ -29,7 +29,7 @@ function App() {
   const [button, setButton] = React.useState(localStorage.getItem('isShort') || true);
   const [localSearchWord, setLocalSearchWord] = React.useState('');
   const [check, setCheck] = React.useState(true); 
-  
+
   React.useEffect(() => {
     setMessage('');
     setCheck(true);
@@ -57,15 +57,13 @@ function App() {
     }
   }, [auth]);
 
-
-
   function checkToken(location) {
     const token = localStorage.getItem('token');
     if (token) {
       mainApi.getUser(token)
       .then(res => {
         setAuth(true);
-        navigate(location);
+        navigate(location, {replace: true});
         setUser(res);
       })
       .catch((err) => {
@@ -88,6 +86,7 @@ function App() {
       setMessage('Возникла ошибка, попробуйте еще раз');
     });
   }
+  
   function searchMovies(name, checked) {
     setMovies([]);
     setLoading(true);
@@ -98,6 +97,7 @@ function App() {
       if(name.length === 0) {
         setMessage('Нужно ввести ключевое слово');
         setMovies([]);
+        setMoviesSearch([]);
       } else
         if (checked) {
           setMessage('');
@@ -112,6 +112,7 @@ function App() {
           }
           else {
             setButton(false);
+            setMoviesSearch([]);
             setMessageSearch('Ничего не найдено');
 
           }
@@ -126,6 +127,7 @@ function App() {
             setMovies(short);
           }
           else {
+            setMoviesSearch([]);
             setMessageSearch('Ничего не найдено');
           }
         }
@@ -230,7 +232,7 @@ function App() {
       if(res.token) {
         setAuth(true);
         localStorage.setItem('token', res.token);
-        navigate('/movies', true);
+        navigate('/movies', {replace: true});
       }
     })
     .catch(err => {
@@ -330,8 +332,8 @@ function App() {
                 message={message}
                 setMessage={setMessage}/>
             </ProtectedRouteElement>} />
-          <Route path='/signin' element={<Login login={login} loading={loading} message={message} setMessage={setMessage} />} />
-          <Route path='/signup' element={<Register registration={registration} loading={loading} message={message} setMessage={setMessage}/>} />
+          <Route path='/signin' element={!auth? <Login login={login} loading={loading} message={message} setMessage={setMessage} /> : <Navigate to='/movies' replace/>} />
+          <Route path='/signup' element={!auth? <Register registration={registration} loading={loading} message={message} setMessage={setMessage}/> :<Navigate to='/movies' replace/>} />
           <Route path='/*' element={<Page404/>} />
         </Routes>
       </CurrentUserContext.Provider>

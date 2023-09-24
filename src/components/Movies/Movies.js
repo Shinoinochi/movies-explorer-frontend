@@ -24,7 +24,6 @@ function Movies({ movies, check, message, searchWord, messageSearch, handleDurat
         }
       }, [window.screen.width]);
 
-
     function count() {
         setNumber(number + addNumber);
     }

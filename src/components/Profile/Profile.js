@@ -8,19 +8,12 @@ const { validate } = require("react-email-validator");
 function Profile({ message, setMessage, handleeEditUser, handleLogout, auth }) {
     const [isEditing, setIsEditing] = React.useState(false);
     const [isSame, setIsSame] = React.useState(true);
-    const [errorEmail, setErrorEmail] = React.useState('');
     const currentUser = React.useContext(CurrentUserContext);
     const { values, handleChange, setIsValid, errors, setErrors, isValid, resetForm, setValues  } = useFormWithValidation();
 
     React.useEffect(() => {
         sameCheck();
-        setIsValid(isValid && validate(values.email));
-        if (!validate(values.email)) {
-            setErrorEmail('Не подходящий email');
-        }
-        else {
-            setErrorEmail('');
-        }
+        setIsValid(isValid);
     },[handleChange])
 
     React.useEffect(() => {
@@ -79,10 +72,9 @@ function Profile({ message, setMessage, handleeEditUser, handleLogout, auth }) {
                     <div>
                         <div className='profile-form__box'>
                             <label className='profile-form__title'>E-mail</label>
-                            <input className='profile-form__input' name='email'  type='email' required maxLength={30} disabled={!isEditing} onChange={handleChange} value={values.email || ''}></input>
+                            <input className='profile-form__input' name='email'  type='email' pattern='[a-z0-9._%+]+@[a-z0-9.]+\.[a-z]{2,4}$' required maxLength={30} disabled={!isEditing} onChange={handleChange} value={values.email || ''}></input>
                         </div>
                         <span className='profile-form__error'>{errors.email}</span>
-                        <span className='profile-form__error'>{errorEmail}</span>
                     </div>
 
                     <span className='profile-form__message'>{message}</span>
