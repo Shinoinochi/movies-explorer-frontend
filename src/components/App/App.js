@@ -227,6 +227,7 @@ function App() {
     localStorage.removeItem('name');
     localStorage.removeItem('isShort');
     localStorage.removeItem('movies');
+    setCheck(false);
     setLocalSearchWord('');
     setMovies([]);
     setAuth(false);
