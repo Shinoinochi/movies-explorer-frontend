@@ -1,18 +1,14 @@
 import React from 'react';
 
-function SearchForm({ handleSearchMovies, check, searchWord, isSaved, handleDurationChange, message }) {
-    const [checked, setChecked] = React.useState(true);
+function SearchForm({ handleSearchMovies, check, setCheck, searchWord, isSaved, message }) {
     const [searchName, setSearchName] = React.useState('');
     function handleSetSearchName(evt) {
         setSearchName(evt.target.value);
     }
     function handleSearch(evt) {
         evt.preventDefault();
-        handleSearchMovies(searchName, checked);
+        handleSearchMovies(searchName, check);
     } 
-    function handleSwitchChange() {
-        handleDurationChange(isSaved);
-    }
     React.useState(()=> {
         setSearchName(searchWord);
     }, []);
@@ -26,7 +22,7 @@ function SearchForm({ handleSearchMovies, check, searchWord, isSaved, handleDura
             <span className='search__error'>{message}</span>
             <div className='switch'>
                 <label className="switch__buttom">
-                    <input type="checkbox" defaultChecked={check} onClick={() => setChecked((state) => !state)} onChange={handleSwitchChange}></input>
+                    <input type="checkbox" defaultChecked={check} onClick={() => setCheck(!check)}></input>
                     <span className="slider"></span>
                 </label>
                 <p className='switch__text'>Короткометражки</p>

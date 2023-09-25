@@ -5,9 +5,10 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import React from 'react';
 
-function Movies({ movies, check, message, searchWord, messageSearch, handleDurationChange, handleSearchMovies, saveMovie, myMovies, auth, loading }) {
+function Movies({ movies, check, setCheck, message, searchWord, messageSearch, handleSearchMovies, saveMovie, myMovies, auth, loading }) {
     const [number, setNumber] = React.useState(0);
     const [addNumber, setAddNumber] = React.useState(0);
+    const [moviesCount, setMoviesCount] = React.useState(0);
 
     React.useEffect(() => {
         if(window.screen.width > 997) {
@@ -23,7 +24,14 @@ function Movies({ movies, check, message, searchWord, messageSearch, handleDurat
             setAddNumber(1);
         }
       }, [window.screen.width]);
-
+      React.useEffect(() => {
+        if (check) {
+            setMoviesCount(movies.filter(movie => movie.duration <= 40).length);
+        }
+        else {
+            setMoviesCount(movies.length);
+        }
+      }, [check]);
     function count() {
         setNumber(number + addNumber);
     }
@@ -33,10 +41,10 @@ function Movies({ movies, check, message, searchWord, messageSearch, handleDurat
             <Header auth={auth}/>
             <main className="main">
                 <section className='movies'>
-                    <SearchForm handleSearchMovies={handleSearchMovies} check={check} searchWord={searchWord} isSaved={false} handleDurationChange={handleDurationChange} message={message}/>
-                        {loading? <Preloader/> : <MoviesCardList isSaved={false} number={number} movies={movies} myMovies={myMovies} saveMovie={saveMovie}/>}
+                    <SearchForm handleSearchMovies={handleSearchMovies} check={check} setCheck={setCheck} searchWord={searchWord} isSaved={false} message={message}/>
+                        {loading? <Preloader/> : <MoviesCardList isSaved={false} check={check} number={number} movies={movies} myMovies={myMovies} saveMovie={saveMovie}/>}
                         <span className='movies__error'>{messageSearch}</span>
-                    <button className={movies.length > number ? `more-button` : `more-button more-button_disabled`} onClick={count}>Ещё</button>
+                    <button className={moviesCount > number ? `more-button` : `more-button more-button_disabled`} onClick={count}>Ещё</button>
                 </section>
             </main>
             <Footer/>

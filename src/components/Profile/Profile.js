@@ -9,7 +9,7 @@ function Profile({ message, setMessage, handleeEditUser, handleLogout, auth }) {
     const [isEditing, setIsEditing] = React.useState(false);
     const [isSame, setIsSame] = React.useState(true);
     const currentUser = React.useContext(CurrentUserContext);
-    const { values, handleChange, setIsValid, errors, setErrors, isValid, resetForm, setValues  } = useFormWithValidation();
+    const { values, handleChange, setIsValid, errors, isValid, setValues  } = useFormWithValidation();
 
     React.useEffect(() => {
         sameCheck();

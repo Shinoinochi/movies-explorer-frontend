@@ -17,8 +17,7 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [user, setUser] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [moviesSearch, setMoviesSearch] = React.useState([]);
-  const [savedMoviesSearch, setSavedMoviesSearch] = React.useState([]);
+  const [savedMoviesList, setSavedMoviesList] = React.useState([]);
   const [auth, setAuth] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
@@ -28,17 +27,18 @@ function App() {
   const [moviesArray, setMoviesArray] = React.useState([]);
   const [button, setButton] = React.useState(localStorage.getItem('isShort') || true);
   const [localSearchWord, setLocalSearchWord] = React.useState('');
-  const [check, setCheck] = React.useState(true); 
+
+  const checkbox = localStorage.getItem('isShort') === 'true'? true : false;
+  const [check, setCheck] = React.useState(checkbox);
+  const [checkSaved, setCheckSaved] = React.useState(false); 
 
   React.useEffect(() => {
     setMessage('');
-    setCheck(true);
   }, [navigate]);
 
   React.useEffect(() => {
       const localMovies = JSON.parse(localStorage.getItem('movies')) || [];
       setMovies(localMovies);
-      setMoviesSearch(localMovies);
       setLocalSearchWord(localStorage.getItem('name') || ''); 
   }, []);
 
@@ -51,7 +51,7 @@ function App() {
       ])
       .then(res => {
         setSavedMovies(res[0]);
-        setSavedMoviesSearch(res[0])
+        setSavedMoviesList(res[0]);
       })
       .catch(err => console.log(err));
     }
@@ -87,7 +87,7 @@ function App() {
     });
   }
   
-  function searchMovies(name, checked) {
+  function searchMovies(name) {
     setMovies([]);
     setLoading(true);
     setMessageSearch('');
@@ -97,22 +97,19 @@ function App() {
       if(name.length === 0) {
         setMessage('Нужно ввести ключевое слово');
         setMovies([]);
-        setMoviesSearch([]);
       } else
-        if (checked) {
+        if (!check) {
           setMessage('');
           const findedMovies = res.filter((movie) => 
-          movie.nameRU.toLowerCase().includes(name.toLowerCase()));
+            movie.nameRU.toLowerCase().includes(name.toLowerCase()));
+            localStorage.setItem('name', name);
+            localStorage.setItem('movies', JSON.stringify(findedMovies));
           if (findedMovies.length !== 0) {
-              setMoviesSearch(findedMovies);
-              localStorage.setItem('name', name);
-              localStorage.setItem('isShort', checked);
-              localStorage.setItem('movies', JSON.stringify(findedMovies));
+              localStorage.setItem('isShort', check);
               setMovies(findedMovies);
           }
           else {
             setButton(false);
-            setMoviesSearch([]);
             setMessageSearch('Ничего не найдено');
 
           }
@@ -121,13 +118,13 @@ function App() {
           setMessage('');
           const findedMovies = res.filter((movie) => 
             movie.nameRU.toLowerCase().includes(name.toLowerCase()));
+            localStorage.setItem('name', name);
+            localStorage.setItem('movies', JSON.stringify(findedMovies));
           if (findedMovies.length !== 0) {
-            setMoviesSearch(findedMovies);
-            const short = findedMovies.filter(movie => movie.duration > 40);
-            setMovies(short);
+            localStorage.setItem('isShort', check);
+            setMovies(findedMovies);
           }
           else {
-            setMoviesSearch([]);
             setMessageSearch('Ничего не найдено');
           }
         }
@@ -147,25 +144,6 @@ function App() {
     }
   }
 
-  function handleDurationChange(isSaved) {
-    if(!check) {
-      setMovies(moviesSearch);
-      setSavedMovies(savedMoviesSearch);
-      setCheck(!check);
-    }
-    else {
-      if (isSaved) {
-        const short = savedMovies.filter(movie => movie.duration > 40);
-        setSavedMovies(short);
-        setCheck(!check);
-      } else {
-        const short = movies.filter(movie => movie.duration > 40);
-        setMovies(short);
-        setCheck(!check);
-      }
-    }
-  }
-
   function searchSavedMovies(name, checked) {
     const token = localStorage.getItem('token');
     setLoading(true);
@@ -175,11 +153,10 @@ function App() {
     .then(res => {
       setLoading(false);
       if (name) {
-        if (checked) {
+        if (!checked) {
           const findedMovies = res.filter((movie) => 
           movie.nameRU.toLowerCase().includes(name.toLowerCase()));
           if (findedMovies.length !== 0) {
-            setSavedMoviesSearch(findedMovies);
             setSavedMovies(findedMovies);
           }
           else {
@@ -191,8 +168,7 @@ function App() {
           const findedMovies = res.filter((movie) => 
             movie.nameRU.toLowerCase().includes(name.toLowerCase()));
           if (findedMovies.length !== 0) {
-            setSavedMoviesSearch(findedMovies);
-            const short = findedMovies.filter(movie => movie.duration > 40);
+            const short = findedMovies.filter(movie => movie.duration <= 40);
             setSavedMovies(short);
           }
           else {
@@ -251,6 +227,8 @@ function App() {
     localStorage.removeItem('name');
     localStorage.removeItem('isShort');
     localStorage.removeItem('movies');
+    setLocalSearchWord('');
+    setMovies([]);
     setAuth(false);
     navigate('/', {replace: true});
   }
@@ -261,8 +239,8 @@ function App() {
       const movieDel = savedMovies.find(movieSaved => movieSaved.nameRU === movie.nameRU);
       mainApi.deleteMovie(movieDel._id, token)
       .then(res => {
-        setSavedMoviesSearch((state) => state.filter((c) => c._id !== movieDel._id));
         setSavedMovies((state) => state.filter((c) => c._id !== movieDel._id));
+        setSavedMoviesList((state) => state.filter((c) => c._id !== movieDel._id));
       })
       .catch(err => console.log(err));
     }
@@ -270,7 +248,7 @@ function App() {
       mainApi.saveMovie(movie, token)
       .then(res => {
         setSavedMovies(oldSave => [...oldSave, res]);
-        setSavedMoviesSearch(oldSave => [...oldSave, res]);
+        setSavedMoviesList(oldSave => [...oldSave, res]);
       })
       .catch(err => console.log(err));
     }
@@ -280,8 +258,8 @@ function App() {
     const token = localStorage.getItem('token');
     mainApi.deleteMovie(movie._id, token)
     .then(res => {
-      setSavedMoviesSearch((state) => state.filter((c) => c._id !== movie._id));
       setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
+      setSavedMoviesList((state) => state.filter((c) => c._id !== movie._id));
     })
     .catch(err => {
       console.log(err);
@@ -298,15 +276,15 @@ function App() {
               <Movies 
                 movies={movies} 
                 check={check}
+                setCheck={setCheck}
                 message={message} 
                 moreMovies={moreMovies} 
                 searchWord={localSearchWord} 
                 button={button} 
                 messageSearch={messageSearch} 
-                handleDurationChange={handleDurationChange} 
                 handleSearchMovies={searchMovies} 
                 saveMovie={addMovie} 
-                myMovies={savedMovies} 
+                myMovies={savedMoviesList} 
                 auth={auth} 
                 loading={loading}
               />
@@ -315,9 +293,10 @@ function App() {
             <ProtectedRouteElement loggedIn={auth}>
               <SavedMovies handleSearchMovies={searchSavedMovies} 
                 messageSearch={messageSearch} 
-                check={check}
-                handleDurationChange={handleDurationChange} 
-                message={message} myMovies={savedMovies} 
+                check={checkSaved}
+                setCheck={setCheckSaved}
+                message={message} 
+                myMovies={savedMovies} 
                 handleDelete={deleteMovie} 
                 loading={loading} 
                 auth={auth}/>
