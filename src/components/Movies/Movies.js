@@ -44,7 +44,7 @@ function Movies({ movies, check, setCheck, message, searchWord, messageSearch, h
                     <SearchForm handleSearchMovies={handleSearchMovies} check={check} setCheck={setCheck} searchWord={searchWord} isSaved={false} message={message}/>
                         {loading? <Preloader/> : <MoviesCardList isSaved={false} check={check} number={number} movies={movies} myMovies={myMovies} saveMovie={saveMovie}/>}
                         <span className='movies__error'>{messageSearch}</span>
-                    <button className={moviesCount > number ? `more-button` : `more-button more-button_disabled`} onClick={count}>Ещё</button>
+                    <button className={moviesCount > number ? `more-button` : `more-button more-button_disabled`} hidden={loading} onClick={count}>Ещё</button>
                 </section>
             </main>
             <Footer/>
