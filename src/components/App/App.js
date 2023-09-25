@@ -168,8 +168,7 @@ function App() {
           const findedMovies = res.filter((movie) => 
             movie.nameRU.toLowerCase().includes(name.toLowerCase()));
           if (findedMovies.length !== 0) {
-            const short = findedMovies.filter(movie => movie.duration <= 40);
-            setSavedMovies(short);
+            setSavedMovies(findedMovies);
           }
           else {
             setMessageSearch('Ничего не найдено');
