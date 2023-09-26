@@ -3,15 +3,13 @@ import { NavLink } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import AuthorizationHeader from '../AuthorizationHeader/AuthorizationHeader'
 
-const logginIn = true;
-
-function Header({ headerStyle }) {
+function Header({ headerStyle, auth }) {
     return (
         <header className={`header ${headerStyle}`}>
           <div className='header__block'>
             <NavLink to='/' className='header__logot logo'><img src={logo} className='header__logo' alt='Логотип'/></NavLink>
           </div>
-          { logginIn ? <Navigation/> : <AuthorizationHeader/> }
+          { auth ? <Navigation/> : <AuthorizationHeader/> }
         </header>
     );
   }

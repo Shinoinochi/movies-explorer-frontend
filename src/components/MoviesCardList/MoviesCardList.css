@@ -17,6 +17,11 @@
     }
 
 }
+
+.movies__error {
+    display: block;
+}
+
 .more-button {
     padding: 0;
     background-color: #2F2F2F;
@@ -36,7 +41,9 @@
     font-weight: 500;
     line-height: normal;
 }
-
+.more-button_disabled {
+    display: none;
+}
 @media screen and (max-width:768px) {
     .cards {
         padding: 0 30px;

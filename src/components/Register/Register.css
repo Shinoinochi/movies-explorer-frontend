@@ -12,6 +12,7 @@
     margin-right: 44px;
 }
 .account-form {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -48,7 +49,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
 }
 
@@ -64,6 +65,15 @@
     line-height: normal;
     align-self: center;
     margin: 0;
+}
+.account-form__error {
+    color: #EE3465;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: left;
+    margin-bottom: 10px;
 }
 .account__link {
     color: #4285F4;
@@ -92,6 +102,11 @@
 
 .account-form__button:hover {
     opacity: 0.8;
+}
+
+.account-form__button_disabled {
+    cursor: default;
+    background-color: #8b8b8b;
 }
 
 .account-form__button-register {
